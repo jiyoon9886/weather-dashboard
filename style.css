@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(34, 31, 31);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+
+}
+
+
+.col-4 {
+    margin: 0px 0px 0px 10px;
+    padding: 10px;
+    background-color: lightgrey;
+    float: left;
+}
+
+.col-7 {
+    float: right;
+    margin: 0px 10px 0px 10px;
+    padding: 10px;
+
+}
+
+.city-info {
+    padding: 30px;
+    background-color: lightsalmon;
+    border-style: ridge;
+}
+
+.five-day {
+    padding: 30px;
+    background-color: yellow
+
+}
+
