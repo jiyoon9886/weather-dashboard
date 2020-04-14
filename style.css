@@ -32,7 +32,6 @@ header {
 
 .city-info {
     padding: 10px;
-    background-color: lightsalmon;
     border-style: ridge;
 }
 
@@ -41,4 +40,14 @@ header {
     background-color: yellow
 
 }
+
+h4 {
+    margin: 5px;
+}
+
+p {
+    float: left;
+    margin: 40px;
+}
+
 
