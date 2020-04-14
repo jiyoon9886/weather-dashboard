@@ -29,21 +29,23 @@ $("button").on("click", function(event) {
      }).then(function(response) {
         //console.log(response);
 
+        var infoBox = $("<div>");
+
         var temp = response.main.temp;
         var tempDisplay = $("<p>").text("Temperature: " + temp + " °F");
-        $(".city-info").append(tempDisplay);
+        infoBox.append(tempDisplay);
 
         var humidity = response.main.humidity;
         var humidDisplay = $("<p>").text("Humidity: " + humidity + " %");
-        $(".city-info").append(humidDisplay);
+        infoBox.append(humidDisplay);
 
         var windspeed = response.wind.speed;
         var windspeedDisplay = $("<p>").text("Wind Speed: " + windspeed + " MPH");
-        $(".city-info").append(windspeedDisplay);
+        infoBox.append(windspeedDisplay);
 
         // Creating an AJAX call for the city UV Index info
-        var lat = response.coord.lat;
-        var lon = response.coord.lon;
+        lat = response.coord.lat;
+        lon = response.coord.lon;
 
         var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
 
@@ -62,10 +64,57 @@ $("button").on("click", function(event) {
         }else {
             uvIndexDisplay.css("background-color", "orange");
         }
-        $(".city-info").append(uvIndexDisplay);
+        infoBox.append(uvIndexDisplay);
+
+        
         });
 
-     });
+        $(".city-info").append(infoBox);
+
+     
+
+     var fiveDayURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+
+     $.ajax({
+        url: fiveDayURL,
+        method: "GET"
+        }).then(function(response) {
+        console.log(response);
+
+        var dailyWeatherArr = response.daily.slice(1,7);
+
+        dailyWeatherArr.map((forecast)=>{
+            var card = $("<div>").attr("class", "card");
+            
+            var dailyForecastDate = forecast.dt;
+            var dateStamp = moment.unix(dailyForecastDate).format("L"); 
+            console.log(dateStamp);
+
+            var cardBody = $("<div>").attr("class", "card-body");
+            cardBody.append(dateStamp);
+            card.append(cardBody);
+            $(".five-day").append(card);
+
+            /* <div class="card">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div> */
+
+        })
+
+
+
+        
+
+
+        })
+     
+     
+    })
+        .catch( err=>console.log(err))
+
+
 
 
     //userCity.push(cityList);
